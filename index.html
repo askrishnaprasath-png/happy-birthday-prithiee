@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday Prithiee</title>
+  <meta name="theme-color" content="#120c10" />
+  <meta name="description" content="A birthday page and letter for Prithiee, from Krishna." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #120c10;
+      --ink-soft: #1c1418;
+      --cream: #f4ead8;
+      --cream-deep: #e6d5b8;
+      --blush: #c48a8a;
+      --champagne: #c9b08b;
+      --seal: #7a2430;
+      --rose: #9a3b4a;
+      --paper-ink: #2c2218;
+      --muted: #b9a79a;
+      --display: "Cormorant Garamond", "Times New Roman", serif;
+      --sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100dvh;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+    button { font: inherit; cursor: pointer; }
+    button:disabled { cursor: default; }
+    h1, h2 { text-wrap: balance; }
+    #app { position: relative; min-height: 100dvh; overflow-x: hidden; }
+    .bg {
+      position: fixed; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(154,59,74,.35), transparent 42%),
+        radial-gradient(ellipse at 80% 80%, rgba(122,36,48,.28), transparent 46%),
+        linear-gradient(180deg, #1a1014 0%, #120c10 48%, #0b0709 100%);
+    }
+    .vignette {
+      position: fixed; inset: 0; pointer-events: none; z-index: 5;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(10,6,8,.78) 100%);
+    }
+    .petal {
+      position: absolute; top: -10%; width: 12px; height: 18px;
+      border-radius: 70% 0 70% 0;
+      background: radial-gradient(circle at 30% 30%, #f0cfc8, var(--blush) 42%, var(--seal));
+      opacity: .78; animation: fall var(--dur, 14s) linear infinite;
+      animation-delay: var(--delay, 0s); left: var(--left);
+    }
+    .petal:nth-child(odd) {
+      background: radial-gradient(circle at 30% 30%, #f6e4d4, var(--champagne) 50%, var(--rose));
+    }
+    @keyframes fall {
+      to { transform: translate3d(var(--drift, 40px), 120vh, 0) rotate(360deg); }
+    }
+    .screen {
+      position: relative; z-index: 10;
+      min-height: 100dvh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 4rem 1.4rem 3rem;
+    }
+    .kicker {
+      font-size: .72rem; font-weight: 500; letter-spacing: .28em;
+      text-transform: uppercase; color: var(--champagne); margin: 0;
+    }
+    .ornament { width: 88px; height: 10px; margin: 1.15rem 0 .4rem; color: var(--champagne); }
+    .title {
+      font-family: var(--display); font-weight: 500; font-size: clamp(1.7rem, 4vw, 2.4rem);
+      line-height: 1.25; max-width: 36rem; margin: 1.4rem 0 0;
+    }
+    .sub { color: var(--muted); font-size: .9rem; max-width: 22rem; line-height: 1.6; margin: 1.1rem 0 0; }
+    .btn {
+      margin-top: 2.2rem; min-height: 48px; padding: .85rem 1.5rem; border: 0;
+      border-radius: 999px; background: var(--cream); color: var(--ink);
+      font-weight: 500; letter-spacing: .02em; transition: transform 150ms ease-out, opacity 150ms ease-out;
+    }
+    .btn:active { transform: scale(.96); }
+    .btn-seal { background: var(--seal); color: var(--cream); box-shadow: 0 12px 30px rgba(122,36,48,.35); }
+    .hero { font-family: var(--display); font-style: italic; font-weight: 500;
+      font-size: clamp(2.4rem, 7vw, 3.8rem); line-height: .95; margin: 1rem 0 0; }
+    .name { font-family: var(--display); font-weight: 600; color: var(--blush);
+      font-size: clamp(3rem, 10vw, 4.6rem); letter-spacing: -.02em; margin: .15rem 0 0; }
+    .from { color: var(--muted); font-size: .9rem; margin: .9rem 0 0; }
+    .cake {
+      margin-top: 1.6rem; width: min(220px, 62vw); filter: drop-shadow(0 24px 30px rgba(0,0,0,.4));
+    }
+    .wish {
+      font-family: var(--display); font-style: italic; font-size: 1.15rem;
+      max-width: 28rem; line-height: 1.55; margin: 1.6rem 0 0; color: rgba(244,234,216,.92);
+    }
+    .overlay {
+      position: fixed; inset: 0; z-index: 40; display: flex; align-items: center; justify-content: center;
+      background: rgba(18,12,16,.74); backdrop-filter: blur(2px); padding: 1rem;
+    }
+    .close {
+      position: absolute; top: .7rem; right: .7rem; width: 44px; height: 44px; border: 0;
+      border-radius: 999px; background: transparent; color: var(--cream); font-size: 1.4rem;
+    }
+    .arriving { color: var(--champagne); letter-spacing: .28em; text-transform: uppercase; font-size: .7rem; margin-bottom: 1.4rem; }
+    .env-scene { perspective: 1400px; width: min(340px, 86vw); height: 220px; }
+    .envelope { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+    .body {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, #efe2c8, #d9c29a);
+      border-radius: 4px 4px 10px 10px;
+      box-shadow: 0 24px 50px rgba(0,0,0,.45);
+      overflow: hidden;
+    }
+    .pocket {
+      position: absolute; inset: 28% 0 0;
+      background: linear-gradient(180deg, #e4d1b0, #d9c29a);
+      clip-path: polygon(0 32%, 50% 0, 100% 32%, 100% 100%, 0 100%);
+      z-index: 3;
+    }
+    .flap {
+      position: absolute; top: 0; left: 0; width: 100%; height: 58%;
+      background: linear-gradient(180deg, #f3e6cc, #ddc79a);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center; z-index: 4;
+      transition: transform 800ms cubic-bezier(.22,1,.36,1);
+    }
+    .envelope.open .flap { transform: rotateX(180deg); z-index: 1; }
+    .mini {
+      position: absolute; left: 8%; right: 8%; top: 18%; height: 78%;
+      background: var(--cream); border-radius: 2px; z-index: 2;
+      transform: translateY(28%);
+      transition: transform 900ms cubic-bezier(.22,1,.36,1) 180ms;
+    }
+    .envelope.open .mini { transform: translateY(-42%); }
+    .seal {
+      position: absolute; left: 50%; top: 38%; z-index: 6; width: 52px; height: 52px;
+      margin-left: -26px; border-radius: 999px;
+      background: radial-gradient(circle at 32% 28%, #c45a62, var(--seal) 55%, #4a1218);
+      box-shadow: 0 8px 16px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.28);
+      display: grid; place-items: center; color: #f3d6c4;
+      font-family: var(--display); font-size: 1.15rem;
+      transition: transform 700ms cubic-bezier(.22,1,.36,1), opacity 500ms ease;
+    }
+    .envelope.open .seal { transform: translate(42px, 78px) rotate(28deg); opacity: .15; }
+    .paper {
+      position: relative; max-height: min(92dvh, 920px); width: min(100%, 36rem);
+      overflow: auto; background: var(--cream); color: var(--paper-ink);
+      padding: 2.1rem 1.5rem 2.4rem; text-align: left;
+      box-shadow: 0 30px 70px rgba(0,0,0,.5);
+      background-image: linear-gradient(180deg, transparent 0, transparent 24px, rgba(160,80,70,.07) 25px);
+      background-size: 100% 28px;
+    }
+    .paper h2 { font-family: var(--display); color: var(--seal); font-size: 1.3rem; margin: 0 0 1.1rem; }
+    .meta { display: grid; gap: 1rem; grid-template-columns: 1fr 1fr; font-family: var(--display); }
+    .lbl { font-family: var(--sans); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(122,36,48,.8); margin: 0 0 .3rem; }
+    .meta p { margin: 0; line-height: 1.45; }
+    .subline { font-family: var(--display); margin: 1.1rem 0 0; padding-top: 1rem; border-top: 1px solid rgba(44,34,24,.15); }
+    .letter-body { font-family: var(--display); font-size: 1.05rem; line-height: 1.75; margin-top: 1.4rem; white-space: pre-wrap; }
+    .mute {
+      position: fixed; bottom: 1rem; right: 1rem; z-index: 30; width: 44px; height: 44px;
+      border: 0; border-radius: 999px; background: rgba(18,12,16,.45); color: var(--cream);
+    }
+    .hidden { display: none !important; }
+    .rise { animation: rise 700ms cubic-bezier(.22,1,.36,1) both; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+      to { opacity: 1; transform: none; filter: none; }
+    }
+    @media (max-width: 520px) { .meta { grid-template-columns: 1fr; } }
+    @media (prefers-reduced-motion: reduce) {
+      .petal, .rise, .flap, .mini, .seal { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="bg" aria-hidden="true" id="petals"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <section class="screen" id="intro">
+      <p class="kicker rise">A page for Prithiee</p>
+      <svg class="ornament rise" viewBox="0 0 88 10" fill="none" aria-hidden="true">
+        <path d="M2 5h28M58 5h28" stroke="currentColor" stroke-width=".8" stroke-linecap="round" opacity=".7"/>
+        <circle cx="44" cy="5" r="2.2" stroke="currentColor" stroke-width=".8"/>
+        <circle cx="44" cy="5" r=".7" fill="currentColor"/>
+      </svg>
+      <h1 class="title rise">If you have 2 mins time please spend on this UI page Prithiee</h1>
+      <p class="sub rise">A small birthday wish is waiting on the other side.</p>
+      <button class="btn" id="openPage" type="button">Open this page</button>
+    </section>
+
+    <section class="screen hidden" id="celebrate">
+      <p class="kicker rise">With warmth, today</p>
+      <h1 class="hero rise">Happy Birthday</h1>
+      <p class="name rise">Prithiee</p>
+      <p class="from rise">From Krishna · Mts · Kec</p>
+      <svg class="cake" viewBox="0 0 200 240" aria-hidden="true">
+        <ellipse cx="100" cy="210" rx="70" ry="10" fill="#0a0708" opacity=".45"/>
+        <rect x="40" y="150" width="120" height="55" rx="8" fill="#f4ead8"/>
+        <rect x="55" y="105" width="90" height="48" rx="8" fill="#efe0c8"/>
+        <rect x="70" y="62" width="60" height="46" rx="8" fill="#f7efe0"/>
+        <path d="M40 158c12 10 24-10 40 0s28-12 40 0 26-10 40 0v12H40z" fill="#7a2430"/>
+        <path d="M55 112c10 8 20-8 30 0s22-8 30 0 18-8 30 0v10H55z" fill="#c48a8a"/>
+        <circle cx="70" cy="176" r="6" fill="#9a3b4a"/>
+        <circle cx="100" cy="182" r="7" fill="#7a2430"/>
+        <circle cx="132" cy="174" r="6" fill="#c48a8a"/>
+        <rect x="92" y="38" width="3" height="26" fill="#c9b08b"/>
+        <rect x="78" y="42" width="3" height="22" fill="#c9b08b"/>
+        <rect x="119" y="42" width="3" height="22" fill="#c9b08b"/>
+        <ellipse cx="93.5" cy="36" rx="4" ry="5" fill="#e8c47a"/>
+        <ellipse cx="79.5" cy="40" rx="3.5" ry="4.5" fill="#e8c47a"/>
+        <ellipse cx="120.5" cy="40" rx="3.5" ry="4.5" fill="#e8c47a"/>
+      </svg>
+      <p class="wish rise">May this year be gentle with you. There is a letter below, written only for you.</p>
+      <button class="btn btn-seal" id="openLetter" type="button">Birthday Treat Application Letter</button>
+    </section>
+
+    <div class="overlay hidden" id="letterOverlay" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
+      <button class="close" id="closeLetter" type="button" aria-label="Close letter">×</button>
+      <div id="envelopeWrap">
+        <p class="arriving">A letter is arriving</p>
+        <div class="env-scene">
+          <div class="envelope" id="envelope">
+            <div class="body"><div class="mini"></div><div class="pocket"></div></div>
+            <div class="flap"></div>
+            <div class="seal">K</div>
+          </div>
+        </div>
+      </div>
+      <article class="paper hidden" id="paper">
+        <h2 id="letterTitle">Birthday Treat Application Letter</h2>
+        <div class="meta">
+          <div>
+            <p class="lbl">From</p>
+            <p>Krishna</p>
+            <p>Mts</p>
+            <p>Kec</p>
+          </div>
+          <div>
+            <p class="lbl">To</p>
+            <p>Prithiee</p>
+            <p>Chem</p>
+            <p>Kec</p>
+          </div>
+        </div>
+        <p class="subline"><strong>Sub:</strong> Regards to acceptance</p>
+        <div class="letter-body">Dear Miss,
+
+Happy birthday prithiga I am krishna this wish is for your birthday treat as a treat can you  follow me on instagram and accept my snapchat because I ever sent you message or call after you telling me you ignore me for not giving me the false hope .. I will understand but my heart can't .. Same as like i follow your words for not msg or call or sending reels to you ..my one and only wish today is accept and follow ... " Ne reply pannuna nalu  pathutu vitutalum ..move on sonalu seri .. oru time accept and return follow pannu silly ah aniku oru karnom sona maari laam solatha pritheee enime na unaku msg panni disturb panna maten soliten that's why I created this uh ... Una summa snap anupratha nalu pathu maanasa thethipen prithee and also in Instagram .. Give your treat for birthday Prithiee "
+
+Yours,
+Krishna
+Mts · Kec</div>
+      </article>
+    </div>
+
+    <button class="mute hidden" id="mute" type="button" aria-label="Mute music">♪</button>
+  </div>
+  <script>
+    const petals = document.getElementById("petals");
+    const places = [6,14,22,31,39,48,57,66,74,82,90,96];
+    places.forEach((left, i) => {
+      const el = document.createElement("span");
+      el.className = "petal";
+      el.style.setProperty("--left", left + "%");
+      el.style.setProperty("--dur", 12 + (i % 6) + "s");
+      el.style.setProperty("--delay", (i * 0.7) + "s");
+      el.style.setProperty("--drift", ((i % 2 ? -1 : 1) * (18 + i * 3)) + "px");
+      petals.appendChild(el);
+    });
+
+    const melody = [
+      [262,.28],[262,.14],[294,.42],[262,.42],[349,.42],[330,.84],
+      [262,.28],[262,.14],[294,.42],[262,.42],[392,.42],[349,.84],
+      [262,.28],[262,.14],[523,.42],[440,.42],[349,.42],[330,.42],[294,.84],
+      [466,.28],[466,.14],[440,.42],[349,.42],[392,.42],[349,1.1]
+    ];
+    let ctx, gain, timer, playing = false;
+    function beep(freq, dur, when) {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      g.gain.setValueAtTime(0.0001, when);
+      g.gain.exponentialRampToValueAtTime(1, when + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, when + dur * 0.92);
+      osc.connect(g); g.connect(gain);
+      osc.start(when); osc.stop(when + dur);
+    }
+    function loop() {
+      if (!playing || !ctx) return;
+      let t = ctx.currentTime + 0.05;
+      melody.forEach(([f, d]) => { beep(f * 2, d * 0.92, t); t += d; });
+      timer = setTimeout(loop, (t - ctx.currentTime + 1.4) * 1000);
+    }
+    function startMusic() {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC || playing) return;
+      ctx = ctx || new AC();
+      gain = gain || ctx.createGain();
+      gain.gain.value = 0.045;
+      gain.connect(ctx.destination);
+      playing = true;
+      ctx.resume();
+      loop();
+    }
+    function stopMusic() {
+      playing = false;
+      if (timer) clearTimeout(timer);
+    }
+
+    const intro = document.getElementById("intro");
+    const celebrate = document.getElementById("celebrate");
+    const overlay = document.getElementById("letterOverlay");
+    const envelope = document.getElementById("envelope");
+    const envelopeWrap = document.getElementById("envelopeWrap");
+    const paper = document.getElementById("paper");
+    const mute = document.getElementById("mute");
+
+    document.getElementById("openPage").addEventListener("click", () => {
+      intro.classList.add("hidden");
+      celebrate.classList.remove("hidden");
+      mute.classList.remove("hidden");
+      startMusic();
+    });
+    document.getElementById("openLetter").addEventListener("click", () => {
+      overlay.classList.remove("hidden");
+      envelopeWrap.classList.remove("hidden");
+      paper.classList.add("hidden");
+      envelope.classList.remove("open");
+      requestAnimationFrame(() => {
+        setTimeout(() => envelope.classList.add("open"), 480);
+        setTimeout(() => {
+          envelopeWrap.classList.add("hidden");
+          paper.classList.remove("hidden");
+        }, 2200);
+      });
+    });
+    document.getElementById("closeLetter").addEventListener("click", () => {
+      overlay.classList.add("hidden");
+    });
+    mute.addEventListener("click", () => {
+      if (playing) { stopMusic(); mute.textContent = "♪"; mute.setAttribute("aria-label", "Play music"); }
+      else { startMusic(); mute.textContent = "♫"; mute.setAttribute("aria-label", "Mute music"); }
+    });
+  </script>
+</body>
+</html>
