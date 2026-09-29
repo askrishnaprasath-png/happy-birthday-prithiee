@@ -2,7 +2,9 @@
 
 A birthday page and letter from **Krishna (Mts, KEC)** to **Prithiee (Chem, KEC)**.
 
-Open the live page: **[happy-birthday-prithiee](https://askrishnaprasath-png.github.io/happy-birthday-prithiee/)**
+## Open the page
+
+Live webpage: https://cdn.jsdelivr.net/gh/askrishnaprasath-png/happy-birthday-prithiee@main/index.html
 
 1. Spend two minutes on the first screen
 2. Open the birthday wish

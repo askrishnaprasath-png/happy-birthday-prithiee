@@ -40,9 +40,8 @@
     .bg {
       position: fixed; inset: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse at 30% 20%, rgba(154,59,74,.35), transparent 42%),
-        radial-gradient(ellipse at 80% 80%, rgba(122,36,48,.28), transparent 46%),
-        linear-gradient(180deg, #1a1014 0%, #120c10 48%, #0b0709 100%);
+        linear-gradient(180deg, rgba(18,12,16,.42), rgba(18,12,16,.78)),
+        url("art/garden.jpg") center/cover no-repeat;
     }
     .vignette {
       position: fixed; inset: 0; pointer-events: none; z-index: 5;
@@ -90,7 +89,8 @@
       font-size: clamp(3rem, 10vw, 4.6rem); letter-spacing: -.02em; margin: .15rem 0 0; }
     .from { color: var(--muted); font-size: .9rem; margin: .9rem 0 0; }
     .cake {
-      margin-top: 1.6rem; width: min(220px, 62vw); filter: drop-shadow(0 24px 30px rgba(0,0,0,.4));
+      margin-top: 1.6rem; width: min(240px, 68vw); height: auto;
+      border-radius: 1.4rem; box-shadow: 0 24px 40px rgba(0,0,0,.45);
     }
     .wish {
       font-family: var(--display); font-style: italic; font-size: 1.15rem;
@@ -197,23 +197,7 @@
       <h1 class="hero rise">Happy Birthday</h1>
       <p class="name rise">Prithiee</p>
       <p class="from rise">From Krishna · Mts · Kec</p>
-      <svg class="cake" viewBox="0 0 200 240" aria-hidden="true">
-        <ellipse cx="100" cy="210" rx="70" ry="10" fill="#0a0708" opacity=".45"/>
-        <rect x="40" y="150" width="120" height="55" rx="8" fill="#f4ead8"/>
-        <rect x="55" y="105" width="90" height="48" rx="8" fill="#efe0c8"/>
-        <rect x="70" y="62" width="60" height="46" rx="8" fill="#f7efe0"/>
-        <path d="M40 158c12 10 24-10 40 0s28-12 40 0 26-10 40 0v12H40z" fill="#7a2430"/>
-        <path d="M55 112c10 8 20-8 30 0s22-8 30 0 18-8 30 0v10H55z" fill="#c48a8a"/>
-        <circle cx="70" cy="176" r="6" fill="#9a3b4a"/>
-        <circle cx="100" cy="182" r="7" fill="#7a2430"/>
-        <circle cx="132" cy="174" r="6" fill="#c48a8a"/>
-        <rect x="92" y="38" width="3" height="26" fill="#c9b08b"/>
-        <rect x="78" y="42" width="3" height="22" fill="#c9b08b"/>
-        <rect x="119" y="42" width="3" height="22" fill="#c9b08b"/>
-        <ellipse cx="93.5" cy="36" rx="4" ry="5" fill="#e8c47a"/>
-        <ellipse cx="79.5" cy="40" rx="3.5" ry="4.5" fill="#e8c47a"/>
-        <ellipse cx="120.5" cy="40" rx="3.5" ry="4.5" fill="#e8c47a"/>
-      </svg>
+      <img class="cake" src="art/cake.jpg" alt="A cream birthday cake with roses and candles" />
       <p class="wish rise">May this year be gentle with you. There is a letter below, written only for you.</p>
       <button class="btn btn-seal" id="openLetter" type="button">Birthday Treat Application Letter</button>
     </section>
